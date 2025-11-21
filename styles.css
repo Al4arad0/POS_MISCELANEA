@@ -1,0 +1,530 @@
+/* Custom properties (variables) for the color palette */
+:root {
+    --primary-color: #BF9DBF;    /* A light purple/pink color */
+    --secondary-color: #F4F5DC;  /* A light cream color */
+    --text-color: #9CACC2;       /* A grayish-blue color for general text */
+    --light-text: #E0CAB1;       /* A warm beige color */
+    --secondary-accent: #AFD9DE; /* A soft light blue for secondary buttons */
+}
+
+/* Universal selector to reset default browser styles */
+* {
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    margin: 0;             /* Removes default margin */
+    padding: 0;            /* Removes default padding */
+}
+
+/* Body styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--secondary-color); /* Sets the background to the light cream color */
+    color: var(--text-color);               /* Sets the default text color to the grayish-blue */
+    display: flex;                          /* Makes the body a flex container to center content */
+    height: 100vh;                          /* Sets the height to 100% of the viewport height */
+}
+
+
+/*Main.html*/
+#main-page{
+    display: block;
+    align-content: center;
+}
+.contMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.miscLogo {
+    background-color: #E6E9EE;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 40px 100px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.miscLogo h1 {
+    font-size: 3em;
+    color: #8C99B3;
+    margin: 0;
+    font-weight: normal;
+}
+
+.miscLogo h2 {
+    font-size: 3em;
+    color: #8C99B3;
+    margin: 0;
+    font-weight: normal;
+}
+
+.button-group {
+    display: flex;
+    gap: 20px;
+}
+
+.button-group .button {
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px 30px; /* Padding inside the button */
+    border: 2px solid black; /* Black border */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 1.2em; /* Font size */
+    font-weight: bold; /* Bold text */
+    color: #8C99B3; /* Text color */
+    text-align: center; /* Center the text horizontally */
+    background-color: #E6E9EE; /* Light gray background */
+    cursor: pointer; /* Indicate it's clickable */
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.1s, box-shadow 0.1s; /* Smooth transition for hover effects */
+    display: inline-block; /* Ensure padding and dimensions are applied correctly */
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;      /* Le damos una altura fija para que no crezca verticalmente */
+    width: 80%;         /* Hacemos que ocupe el 80% del ancho disponible */
+    max-width: 900px;   /* Le ponemos un tope al ancho en pantallas grandes */
+    margin: 40px auto;  /* Lo centramos y le damos un poco de espacio */
+}
+
+/*LogIn.html*/
+#login-page {
+    background-color: #f3f4db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#login-page .login-container {
+    background-color: #f0f2f5;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    box-sizing: border-box;
+}
+
+#login-page .logo h1, #login-page .logo h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+}
+
+#login-page .alert {
+    font-size: 0.8em;
+    color: #8C99B3;
+    margin: 10px 0;
+    text-align: center;
+}
+
+#login-page .input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#login-page input[type="text"],
+#login-page input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    text-align: center;
+    color: #8C99B3;
+    background-color: #f3f4db;
+}
+
+#login-page input::placeholder {
+    color: #8C99B3;
+    opacity: 1;
+}
+
+#login-page .btn {
+    padding: 12px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #8C99B3;
+    background-color: #f3f4db;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s, box-shadow 0.1s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+#login-page .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+#login-page .btn:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+#login-page .btn.secondary {
+    display: none;
+}
+
+/*register.html*/
+#register-page {
+    background-color: #f3f4db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#register-page .container {
+    background-color: #f0f2f5;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    box-sizing: border-box;
+}
+
+#register-page .logo h1, #register-page .logo h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+}
+
+#register-page .alert {
+    font-size: 0.8em;
+    color: #8C99B3;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#register-page .input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#register-page input[type="text"],
+#register-page input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    text-align: center;
+    color: #8C99B3;
+    background-color: #f3f4db;
+}
+
+#register-page input::placeholder {
+    color: #8C99B3;
+    opacity: 1;
+}
+
+#register-page .button {
+    padding: 12px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #8C99B3;
+    background-color: #f3f4db;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s, box-shadow 0.1s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+#register-page .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+#register-page .button:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Hover effect for buttons */
+.button-group .button:hover {
+    transform: translateY(-2px); /* Lift button slightly */
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Active (click) effect for buttons */
+.button-group .button:active {
+    transform: translateY(0); /* Return to original position */
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2); /* Return to original shadow */
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #f0f2f5;
+    padding: 1.5rem 1rem;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Adds a shadow to the right side of the sidebar */
+}
+
+/* Logo within the sidebar */
+.sidebar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--primary-color); /* Uses the primary color */
+    margin-bottom: 2rem;
+}
+
+/* Navigation list within the sidebar */
+.sidebar nav ul {
+    list-style: none; /* Removes bullet points from the list */
+}
+
+/* Navigation links within the sidebar */
+.sidebar nav ul li a {
+    display: flex;           /* Makes the link a flex container to align the icon and text */
+    align-items: center;     /* Vertically centers the items */
+    padding: 1rem;
+    text-decoration: none;   /* Removes the underline from links */
+    color: var(--text-color);
+    border-radius: 8px;      /* Adds rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for background color changes */
+}
+
+/* Hover and active state for sidebar links */
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    background-color: var(--primary-color); /* Changes background color on hover or when active */
+    color: #fff;                             /* Changes text color to white */
+}
+
+/* Material icons within the sidebar links */
+.sidebar nav ul li a .material-icons {
+    margin-right: 1rem; /* Adds space between the icon and the text */
+}
+
+/* Main content area styles */
+.main-content {
+    flex-grow: 1; /* Allows the main content to take up the remaining space */
+    padding: 2rem;
+    overflow-y: auto; /* Adds a vertical scrollbar if content exceeds the height */
+}
+
+/* Header within the main content */
+.main-content header {
+    display: flex;
+    justify-content: space-between; /* Pushes items to the start and end of the container */
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--light-text); /* Adds a subtle bottom border */
+}
+
+/* Text color for user information */
+.user-info span {
+    color: var(--light-text);
+}
+
+/* Container for sales-related sections */
+.sales-container {
+    display: flex;
+    gap: 2rem; /* Adds space between the columns */
+}
+
+/* Product search bar container */
+.product-search {
+    flex-basis: 30%; /* Sets the initial width of the element */
+    position: sticky; /* Keeps the element in place while scrolling */
+    top: 2rem;        /* Positions it 2rem from the top */
+}
+
+/* Styling for the search input field */
+.product-search input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--light-text);
+    border-radius: 8px;
+}
+
+/* Panel for products and cart */
+.sales-panel {
+    flex-basis: 70%;
+    display: flex;
+    gap: 2rem;
+}
+
+/* Product list grid */
+.product-list {
+    flex: 1;
+    display: grid;
+    /* Creates a responsive grid with a minimum card width of 150px */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Individual product card styles */
+.product-card {
+    border: 1px solid var(--light-text);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    transition: transform 0.2s; /* Adds a smooth transform effect */
+}
+
+/* Hover effect for product cards */
+.product-card:hover {
+    transform: translateY(-5px); /* Lifts the card slightly */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Adds a more prominent shadow */
+}
+
+/* Product card image */
+.product-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+/* Product card title */
+.product-card h4 {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+/* Product card price */
+.product-card p {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Cart summary container */
+.cart-summary {
+    width: 300px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 2rem;
+    height: fit-content; /* Adjusts height to fit content */
+}
+
+/* Cart summary title */
+.cart-summary h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* List of cart items */
+#cartItems {
+    list-style: none;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--light-text);
+    padding-bottom: 1rem;
+}
+
+/* Total price section */
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Styles for specific buttons */
+.checkout-btn {
+    background-color: var(--primary-color);
+}
+
+.credit-btn {
+    background-color: var(--secondary-accent);
+}
+
+.cancel-btn {
+    background-color: #dc3545; /* A standard red color */
+}
+
+/* General button styles for checkout, credit, and cancel */
+.checkout-btn, .credit-btn, .cancel-btn {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Media query for responsiveness on smaller screens */
+@media (max-width: 768px) {
+    /* Main body changes to a vertical layout */
+    body {
+        flex-direction: column;
+    }
+    /* Sidebar takes full width */
+    .sidebar {
+        width: 100%;
+        padding: 1rem;
+    }
+    /* Main content padding adjustment */
+    .main-content {
+        padding: 1rem;
+    }
+    /* Sales container changes to a vertical stack */
+    .sales-container {
+        flex-direction: column;
+    }
+    /* Product search becomes static and full width */
+    .product-search {
+        flex-basis: auto;
+        position: static;
+    }
+    /* Sales panel also changes to a vertical stack */
+    .sales-panel {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    /* Product list grid adjusts for smaller screens */
+    .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    /* Cart summary becomes full width and static */
+    .cart-summary {
+        width: 100%;
+        position: static;
+    }
+}
