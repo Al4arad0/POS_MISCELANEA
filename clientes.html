@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes - POS Miscelánea Mary</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="clientes.js" defer></script> 
+    <script type="module" src="clientes.js"></script>
+    <script type="module" src="seguridad.js"></script>
+    <script src="responsive.js" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <button id="mobile-menu-btn" class="menu-btn">
+        <span class="material-icons">menu</span>
+    </button>
 
+    <div id="overlay" class="overlay"></div>
     <div class="sidebar">
         <div class="logo">POS MISCELÁNEA MARY</div>
         <nav>
             <ul>
                 <li><a href="ventas.html"><span class="material-icons">sell</span> Ventas</a></li>
                 <li><a href="inventario.html"><span class="material-icons">inventory_2</span> Inventario</a></li>
-                <li><a href="clientes.html"><span class="material-icons">groups</span> Clientes</a></li>
-                <li><a href="proveedores.html" class="active"><span class="material-icons">local_shipping</span> Proveedores</a></li>
+                <li><a href="clientes.html" class="active"><span class="material-icons">groups</span> Clientes</a></li>
+                <li><a href="proveedores.html" ><span class="material-icons">local_shipping</span> Proveedores</a></li>
                 <li><a href="reportes.html"><span class="material-icons">bar_chart</span> Reportes</a></li>
                 <li><a href="configuracion.html"><span class="material-icons">settings</span> Configuración</a></li>
                 <li><a href="main.html"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
@@ -34,6 +42,7 @@
 
         <section class="clients-container">
             <h2>Lista de Clientes</h2>
+            <div class="table-responsive">
             <table id="clientTable">
                 <thead>
                     <tr>
@@ -48,6 +57,7 @@
                     <!-- Los clientes se cargarán aquí dinámicamente -->
                 </tbody>
             </table>
+            </div>
         </section>
 
         <section class="add-client-form">
@@ -61,6 +71,43 @@
         </section>
     </div>
 
-    <script src="js/clientes.js" defer></script>
+    <div id="editClientModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeEditClient">&times;</span>
+            <h2>Editar Cliente</h2>
+            <form id="editClientForm">
+                <input type="hidden" id="editClientId">
+                
+                <label for="editClientNombre">Nombre Completo:</label>
+                <input type="text" id="editClientNombre" required>
+                
+                <label for="editClientTelefono">Teléfono de Contacto:</label>
+                <input type="text" id="editClientTelefono">
+                
+                <button type="submit" class="checkout-btn" style="margin-top: 20px;">Actualizar Datos</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="payModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closePayModal">&times;</span>
+            <h2>Abonar a Cuenta</h2>
+            
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                <p>Cliente: <strong id="payClientName" style="color: var(--primary-color);"></strong></p>
+                <p>Deuda Actual: <strong style="color: #dc3545;">$<span id="payCurrentDebt"></span></strong></p>
+            </div>
+
+            <form id="payForm">
+                <input type="hidden" id="payClientId">
+                
+                <label for="payAmount">Monto a abonar ($):</label>
+                <input type="number" id="payAmount" step="0.01" min="0" placeholder="0.00" required>
+                
+                <button type="submit" class="checkout-btn" style="background-color: #28a745; margin-top: 20px;">Registrar Pago</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
