@@ -103,6 +103,7 @@ body {
 #login-page .login-container {
     background-color: #f0f2f5;
     border: 2px solid black;
+    align-self:center;
     border-radius: 5px;
     padding: 30px 40px;
     display: flex;
@@ -133,7 +134,17 @@ body {
     margin-bottom: 15px;
 }
 
-#login-page input[type="text"],
+#login-page input[type="text"]{
+     width: 100%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    text-align: center;
+    color: #8C99B3;
+    background-color: #f3f4db;
+}
 #login-page input[type="password"] {
     width: 100%;
     padding: 10px;
@@ -181,97 +192,6 @@ body {
 #login-page .btn.secondary {
     display: none;
 }
-
-/*register.html*/
-#register-page {
-    background-color: #f3f4db;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: sans-serif;
-}
-
-#register-page .container {
-    background-color: #f0f2f5;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 30px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    box-sizing: border-box;
-}
-
-#register-page .logo h1, #register-page .logo h2 {
-    font-size: 1.5em;
-    color: #333;
-    margin: 0;
-    font-weight: normal;
-    text-align: center;
-}
-
-#register-page .alert {
-    font-size: 0.8em;
-    color: #8C99B3;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-#register-page .input-group {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-#register-page input[type="text"],
-#register-page input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1em;
-    text-align: center;
-    color: #8C99B3;
-    background-color: #f3f4db;
-}
-
-#register-page input::placeholder {
-    color: #8C99B3;
-    opacity: 1;
-}
-
-#register-page .button {
-    padding: 12px;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-size: 1em;
-    font-weight: bold;
-    color: #8C99B3;
-    background-color: #f3f4db;
-    cursor: pointer;
-    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
-    transition: transform 0.1s, box-shadow 0.1s;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    width: 100%;
-}
-
-#register-page .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
-}
-
-#register-page .button:active {
-    transform: translateY(0);
-    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
-}
-
 
 /* Hover effect for buttons */
 .button-group .button:hover {
@@ -489,42 +409,201 @@ body {
     font-size: 1rem;
 }
 
-/* Media query for responsiveness on smaller screens */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* Fondo oscuro transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.close-modal {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-modal:hover { color: #000; }
+
+.modal h2 { margin-top: 0; color: var(--primary-color); }
+
+.modal input, .modal select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal label {
+    display: block;       /* Hace que ocupe su propia línea */
+    text-align: left;     /* Alinea el texto a la izquierda */
+    margin-top: 15px;     /* Espacio arriba de la etiqueta */
+    margin-bottom: 5px;   /* Espacio pequeño entre etiqueta e input */
+    font-weight: bold;    /* Texto en negrita */
+    color: #555;          /* Color gris oscuro */
+    font-size: 0.9rem;
+}
+
+.thumb-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover; /* Recorta la imagen para que sea cuadrada sin deformar */
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* --- ESTILOS RESPONSIVOS (MOBILE FIRST ADAPTATION) --- */
+
+/* 1. Botón de Menú (Oculto en escritorio) */
+.menu-btn {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* 2. Overlay (Fondo oscuro al abrir menú) */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1050;
+}
+
+/* 3. Contenedor de Tablas (Scroll Horizontal) */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Suavidad en iOS */
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+/* --- REGLAS PARA MÓVILES (Pantallas menores a 768px) --- */
 @media (max-width: 768px) {
-    /* Main body changes to a vertical layout */
+    
+    /* Cuerpo y Layout General */
     body {
-        flex-direction: column;
+        flex-direction: column; /* Apilar todo verticalmente */
     }
-    /* Sidebar takes full width */
+
+    /* Sidebar (Menú Lateral) */
     .sidebar {
-        width: 100%;
-        padding: 1rem;
+        position: fixed;
+        left: -260px; /* Oculto a la izquierda */
+        top: 0;
+        height: 100%;
+        z-index: 1100;
+        transition: left 0.3s ease; /* Animación suave */
     }
-    /* Main content padding adjustment */
+
+    .sidebar.active {
+        left: 0; /* Aparece */
+    }
+
+    /* Mostrar botón de menú */
+    .menu-btn {
+        display: block;
+    }
+
+    /* Main Content */
     .main-content {
-        padding: 1rem;
+        padding: 15px;
+        padding-top: 60px; /* Espacio para el botón de menú */
+        width: 100%;
     }
-    /* Sales container changes to a vertical stack */
-    .sales-container {
+
+    /* Encabezados */
+    .main-content header {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
-    /* Product search becomes static and full width */
+
+    /* POS / Ventas Container */
+    .sales-container {
+        flex-direction: column-reverse; /* Carrito arriba o abajo? Probemos productos arriba */
+        /* Si quieres carrito arriba usa column-reverse, si productos arriba usa column */
+        flex-direction: column; 
+    }
+
     .product-search {
-        flex-basis: auto;
         position: static;
+        margin-bottom: 15px;
     }
-    /* Sales panel also changes to a vertical stack */
+
     .sales-panel {
         flex-direction: column;
-        gap: 1rem;
     }
-    /* Product list grid adjusts for smaller screens */
+
+    /* Lista de Productos (Grid de 2 columnas) */
     .product-list {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas forzadas */
+        gap: 10px;
+        padding: 5px;
     }
-    /* Cart summary becomes full width and static */
+
+    .product-card img {
+        height: 80px; /* Imágenes más pequeñas */
+    }
+
+    /* Carrito de Compras */
     .cart-summary {
         width: 100%;
-        position: static;
+        position: static; /* Ya no es sticky */
+        margin-bottom: 20px;
+        order: -1; /* Pone el carrito ARRIBA de los productos para verlo siempre */
     }
+    
+    /* Formularios y Inputs */
+    form input, form select, form textarea {
+        font-size: 16px; /* Evita zoom automático en iPhone */
+    }
+
+    .settings-card form div {
+        flex-direction: column; /* Inputs de configuración apilados */
+    }
+
+    /* Modales */
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+#scannerModal {
+    z-index: 99999 !important;
 }
