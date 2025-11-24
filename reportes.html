@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportes - POS Miscelánea Mary</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="reportes.js"></script>
+    <script type="module" src="seguridad.js"></script>
+    <script src="responsive.js" defer></script>
 </head>
 <body>
+    <button id="mobile-menu-btn" class="menu-btn">
+        <span class="material-icons">menu</span>
+    </button>
 
+    <div id="overlay" class="overlay"></div>
     <div class="sidebar">
         <div class="logo">POS MISCELÁNEA MARY</div>
         <nav>
@@ -17,10 +24,10 @@
                 <li><a href="ventas.html"><span class="material-icons">sell</span> Ventas</a></li>
                 <li><a href="inventario.html"><span class="material-icons">inventory_2</span> Inventario</a></li>
                 <li><a href="clientes.html"><span class="material-icons">groups</span> Clientes</a></li>
-                <li><a href="proveedores.html" class="active"><span class="material-icons">local_shipping</span> Proveedores</a></li>
-                <li><a href="reportes.html"><span class="material-icons">bar_chart</span> Reportes</a></li>
+                <li><a href="proveedores.html" ><span class="material-icons">local_shipping</span> Proveedores</a></li>
+                <li><a href="reportes.html" class="active"><span class="material-icons">bar_chart</span> Reportes</a></li>
                 <li><a href="configuracion.html"><span class="material-icons">settings</span> Configuración</a></li>
-                <li><a href="main.html"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
+                <li><a href="#" onclick="logout()"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
             </ul>
         </nav>
     </div>
@@ -39,8 +46,12 @@
                 <label for="reportType">Tipo de Reporte:</label>
                 <select id="reportType">
                     <option value="ventas-mensuales">Ventas Totales por Mes</option>
-                    <option value="productos-mas-vendidos">Productos Más Vendidos</option>
                     <option value="ventas-por-dia">Ventas por Día</option>
+                    <option value="productos-mas-vendidos">Productos Más Vendidos (Tabla)</option>
+                    
+                    <option value="metodos-pago">Métodos de Pago (Pastel)</option>
+                    <option value="horas-pico">Horas Pico de Venta</option>
+                    <option value="top-deudores">Clientes con Mayor Deuda</option>
                 </select>
                 <button id="generateReportBtn" class="checkout-btn">Generar</button>
             </div>
@@ -86,6 +97,5 @@
 
     </div>
 
-    <script src="js/reportes.js" defer></script>
 </body>
 </html>
