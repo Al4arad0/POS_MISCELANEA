@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proveedores - POS Miscelánea Mary</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/proveedores.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="proveedores.js" defer></script>
+    <script type="module" src="proveedores.js"></script>
+    <script type="module" src="seguridad.js"></script>
+    <script src="responsive.js" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <button id="mobile-menu-btn" class="menu-btn">
+        <span class="material-icons">menu</span>
+    </button>
 
+    <div id="overlay" class="overlay"></div>
     <div class="sidebar">
         <div class="logo">POS MISCELÁNEA MARY</div>
         <nav>
@@ -20,7 +27,7 @@
                 <li><a href="proveedores.html" class="active"><span class="material-icons">local_shipping</span> Proveedores</a></li>
                 <li><a href="reportes.html"><span class="material-icons">bar_chart</span> Reportes</a></li>
                 <li><a href="configuracion.html"><span class="material-icons">settings</span> Configuración</a></li>
-                <li><a href="main.html"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
+                <li><a href="#" onclick="logout()"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
             </ul>
         </nav>
     </div>
@@ -35,7 +42,7 @@
 
         <section class="clients-container">
             <h2>Lista de Proveedores</h2>
-            <!-- CORRECCIÓN: IDs específicos para proveedores -->
+            <div class="table-responsive">
             <table id="supplierTable">
                 <thead>
                     <tr>
@@ -49,6 +56,7 @@
                     <!-- Los proveedores se cargarán aquí dinámicamente -->
                 </tbody>
             </table>
+            </div>
         </section>
 
         <section class="add-client-form">
@@ -61,6 +69,22 @@
             </form>
         </section>
     </div>
+    <div id="editSupplierModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeEditSupplier">&times;</span>
+            <h2>Editar Proveedor</h2>
+            <form id="editSupplierForm">
+                <input type="hidden" id="editSupplierId">
 
+                <label for="editSupplierNombre">Nombre del Proveedor/Empresa:</label>
+                <input type="text" id="editSupplierNombre" required>
+
+                <label for="editSupplierContacto">Contacto (Teléfono/Email):</label>
+                <input type="text" id="editSupplierContacto" required>
+
+                <button type="submit" class="checkout-btn" style="margin-top: 20px;">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
