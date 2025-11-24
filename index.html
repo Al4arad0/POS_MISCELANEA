@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Punto de Venta Miscelánea</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="server.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="seguridad.js"></script>
+    <script src="responsive.js" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <button id="mobile-menu-btn" class="menu-btn">
+        <span class="material-icons">menu</span>
+    </button>
 
+    <div id="overlay" class="overlay"></div>
     <div class="sidebar">
         <div class="logo">POS MISCELÁNEA MARY</div>
         <nav>
@@ -17,10 +22,10 @@
                 <li><a href="ventas.html"><span class="material-icons">sell</span> Ventas</a></li>
                 <li><a href="inventario.html"><span class="material-icons">inventory_2</span> Inventario</a></li>
                 <li><a href="clientes.html"><span class="material-icons">groups</span> Clientes</a></li>
-                <li><a href="proveedores.html" class="active"><span class="material-icons">local_shipping</span> Proveedores</a></li>
+                <li><a href="proveedores.html"><span class="material-icons">local_shipping</span> Proveedores</a></li>
                 <li><a href="reportes.html"><span class="material-icons">bar_chart</span> Reportes</a></li>
                 <li><a href="configuracion.html"><span class="material-icons">settings</span> Configuración</a></li>
-                <li><a href="main.html"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
+                <li><a href="#" onclick="logout()"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
             </ul>
         </nav>
     </div>
