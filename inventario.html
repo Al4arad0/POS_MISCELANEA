@@ -4,23 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario - POS Miscelánea Mary</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/inventario.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="inventario.js" defer></script>
+    <script type="module" src="inventario.js"></script>
+    <script type="module" src="seguridad.js"></script>
+    <script src="responsive.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <button id="mobile-menu-btn" class="menu-btn">
+        <span class="material-icons">menu</span>
+    </button>
 
+    <div id="overlay" class="overlay"></div>
     <div class="sidebar">
         <div class="logo">POS MISCELÁNEA MARY</div>
         <nav>
             <ul>
                 <li><a href="ventas.html"><span class="material-icons">sell</span> Ventas</a></li>
-                <li><a href="inventario.html"><span class="material-icons">inventory_2</span> Inventario</a></li>
+                <li><a href="inventario.html" class="active"><span class="material-icons">inventory_2</span> Inventario</a></li>
                 <li><a href="clientes.html"><span class="material-icons">groups</span> Clientes</a></li>
-                <li><a href="proveedores.html" class="active"><span class="material-icons">local_shipping</span> Proveedores</a></li>
+                <li><a href="proveedores.html"><span class="material-icons">local_shipping</span> Proveedores</a></li>
                 <li><a href="reportes.html"><span class="material-icons">bar_chart</span> Reportes</a></li>
                 <li><a href="configuracion.html"><span class="material-icons">settings</span> Configuración</a></li>
-                <li><a href="main.html"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
+                <li><a href="#" onclick="logout()"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
             </ul>
         </nav>
     </div>
@@ -35,11 +44,14 @@
 
         <section class="inventory-container">
             <h2>Lista de Productos</h2>
+            <div class="table-responsive">
             <table id="productTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Img</th>
+                        <th>Codigo</th>
                         <th>Nombre</th>
+                        <th>Proveedor</th>
                         <th>Precio Venta</th>
                         <th>Stock</th>
                         <th>Acciones</th>
@@ -48,23 +60,103 @@
                 <tbody id="inventoryList">
                     </tbody>
             </table>
+            </div>
         </section>
 
         <section class="add-product-form">
             <h2>Agregar Nuevo Producto</h2>
             <form id="newProductForm">
+                <label for="imagenProducto" style="display:block; font-weight:bold;">Imagen del Producto:</label>
+                <input type="file" id="imagenProducto" accept="image/*" style="margin-bottom: 15px;">
                 <input type="text" id="nombre" placeholder="Nombre" required>
-                <input type="text" id="codigo_barras" placeholder="Código de Barras" required>
-                <input type="number" id="precio_compra" placeholder="Precio Compra" step="0.01" required>
-                <input type="number" id="precio_venta" placeholder="Precio Venta" step="0.01" required>
+                <label for="codigo_barras" style="display:block; margin-top:10px; font-weight:bold;">Código de Barras:</label>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                        <input type="text" id="codigo_barras" placeholder="Escanea o escribe..." style="flex-grow: 1;">
+                        
+                        <button type="button" id="btnGenerarCodigo" title="Generar aleatorio" class="checkout-btn" style="width: auto; padding: 10px; background-color: #6c757d; margin:0;">
+                            <span class="material-icons">autorenew</span>
+                        </button>
+
+                        <button type="button" id="btnEscanearInventario" title="Escanear con Cámara" class="checkout-btn" style="width: auto; padding: 10px; background-color: var(--primary-color); margin:0;">
+                            <span class="material-icons">qr_code_scanner</span>
+                        </button>
+                    </div>
+                <input type="number" id="precio_compra" placeholder="Precio Compra" step="0.5" required>
+                <input type="number" id="precio_venta" placeholder="Precio Venta" step="0.5" required>
                 <input type="number" id="stock" placeholder="Stock" required>
-                <input type="text" id="unidad" placeholder="Unidad" required>
-                <input type="text" id="proveedor_ref" placeholder="Proveedor" required>
-                <button type="submit" class="checkout-btn">Agregar Producto</button>
+                <label for="unidad" style="display:block; margin-top:10px; font-weight:bold; color:#555;">Unidad</label>
+                <select id="unidad" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <option value="" disabled selected>-- Selecciona Unidad --</option>
+                    <option value="Pieza">Pieza</option>
+                    <option value="Paquete">Paquete</option>
+                    <option value="Caja">Caja</option>
+                    <option value="Kilogramo">Kilogramo</option>
+                    <option value="Litro">Litro</option>
+                    <option value="Granel">Granel</option>
+                    <option value="Granel">Metro</option>
+                    <option value="Servicio">Unidad Genérica</option>
+                </select>
+                <label for="proveedor_ref" style="display:block; margin-top:5px; font-weight:bold; color:#555;">Proveedor:</label>
+                <input type="text" id="proveedor_ref" list="listaProveedores" placeholder="Escribe o selecciona un proveedor" required>
+                
+                <datalist id="listaProveedores"></datalist>
+
+                <button type="submit" class="checkout-btn" style="margin-top: 15px;">Agregar Producto</button>
             </form>
         </section>
     </div>
 
-    <script src="js/inventario.js" defer></script>
+    <div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Editar Producto</h2>
+        <form id="editProductForm">
+            <input type="hidden" id="editId">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <img id="editPreviewImg" src="" alt="Vista previa" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; border: 1px solid #ccc;">
+                <br>
+                <label for="editImagen" style="cursor: pointer; color: blue; font-size: 0.9em;">Cambiar Imagen</label>
+                <input type="file" id="editImagen" accept="image/*" style="display: none;">
+            </div>   
+            <label for="editNombre">Nombre del Producto:</label>
+            <input type="text" id="editNombre" required>
+            <label for="editCodigo" style="display:block; font-weight:bold;">Código de Barras:</label>
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                <input type="text" id="editCodigo" placeholder="Escanea o escribe..." style="flex-grow: 1;">
+                
+                <button type="button" id="btnGenerarEdit" title="Generar Nuevo" class="checkout-btn" style="width: auto; padding: 10px; background-color: #6c757d; margin:0;">
+                    <span class="material-icons">autorenew</span>
+                </button>
+
+                <button type="button" id="btnEscanearEdit" title="Escanear" class="checkout-btn" style="width: auto; padding: 10px; background-color: var(--primary-color); margin:0;">
+                    <span class="material-icons">qr_code_scanner</span>
+                </button>
+            </div>
+            <canvas id="barcodeCanvas" style="display: none; margin-bottom: 15px; max-width: 100%;"></canvas>
+            <input type="text" id="editCodigo">
+            <label for="editPrecioC">Precio de Compra ($):</label>
+            <input type="number" id="editPrecioC" step="0.01">
+            <label for="editPrecioV">Precio de Venta ($):</label>
+            <input type="number" id="editPrecioV" step="0.01" required>
+            <label for="editStock">Cantidad en Stock:</label>
+            <input type="number" id="editStock" required>
+            
+            <button type="submit" class="checkout-btn" style="margin-top: 20px;">Guardar Cambios</button>
+        </form>
+    </div>
+</div>
+
+<div id="scannerModal" class="modal" style="display: none; z-index: 10000;">
+    <div class="modal-content" style="background: #000; width: 100%; height: 100%; max-width: none; max-height: none; padding: 0; display: flex; flex-direction: column;">
+        <div style="padding: 15px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.6); color: white;">
+            <h3>Escanear para Alta</h3>
+            <span id="closeScanner" style="font-size: 2rem; cursor: pointer;">&times;</span>
+        </div>
+        <div id="reader" style="width: 100%; flex-grow: 1; background: black;"></div>
+        <div style="padding: 20px; text-align: center; color: white; background: rgba(0,0,0,0.6);">
+            <p>Apunta al código de barras del producto</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
