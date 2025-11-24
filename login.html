@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - POS Miscelánea Mary</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="auth-login.js"></script>
+    <script src="responsive.js" defer></script>
+</head>
+<body>
+    
+    <div id="login-page">
+        <div class="login-container">
+            <div class="logo">
+                <h1>POS MISCELÁNEA</h1>
+                <h2>MARY</h2>
+                <p style="font-size: 0.8rem; margin-top: 5px; color: #666;">Acceso exclusivo autorizado</p>
+            </div>
+            
+            <p class="alert" id="loginError" style="color: red; display: none;"></p>
+
+            <form id="loginForm" style="width: 100%;">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                </div>
+                
+                <button type="submit" class="btn" id="loginBtn">Ingresar</button>
+            </form>
+            
+            </div>
+    </div>
+</body>
+</html>
