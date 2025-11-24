@@ -6,10 +6,19 @@
     <title>Punto de Venta Miscelánea</title>
     <link rel="stylesheet" href="styles.css">
     <script src="ventas.js" defer></script>
+    <script type="module" src="ventas.js"></script>
+    <script type="module" src="seguridad.js"></script>
+    <script src="responsive.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <button id="mobile-menu-btn" class="menu-btn">
+        <span class="material-icons">menu</span>
+    </button>
 
+    <div id="overlay" class="overlay"></div>
     <div class="sidebar">
         <div class="logo">POS MISCELÁNEA MARY</div>
         <nav>
@@ -20,7 +29,7 @@
                 <li><a href="proveedores.html" ><span class="material-icons">local_shipping</span> Proveedores</a></li>
                 <li><a href="reportes.html"><span class="material-icons">bar_chart</span> Reportes</a></li>
                 <li><a href="configuracion.html"><span class="material-icons">settings</span> Configuración</a></li>
-                <li><a href="main.html"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
+                <li><a href="#" onclick="logout()"><span class="material-icons">logout</span> Cerrar Sesión</a></li>
             </ul>
         </nav>
     </div>
@@ -35,7 +44,7 @@
 
         <section class="sales-container">
             <div class="product-search">
-                <input type="text" id="searchInput" placeholder="Buscar producto por nombre...">
+                <input type="text" id="searchInput" placeholder="Buscar producto o escanear..." autofocus>
             </div>
             <div class="sales-panel">
                 <div class="product-list">
@@ -57,5 +66,63 @@
         </section>
     </div>
 
+    <div class="client-selection" style="margin-bottom: 15px; border-top: 1px solid #ccc; padding-top: 10px;">
+        <label for="clientSelect">Cliente:</label>
+        <select id="clientSelect" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+            <option value="">-- Cliente General (Público) --</option>
+            </select>
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="creditCheck" style="width: 20px; height: 20px;">
+            <label for="creditCheck" style="cursor: pointer;">Venta a Crédito (Mandar a cuenta)</label>
+        </div>
+    </div>
+
+    <div id="bulkModal" class="modal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+        <span class="close-modal" id="closeBulkModal">&times;</span>
+        <h2 id="bulkProductName">Producto a Granel</h2>
+        <p>Precio por Kg/Lt: <strong id="bulkProductPrice"></strong></p>
+        
+        <form id="bulkForm">
+            <input type="hidden" id="bulkProductId">
+            
+            <label for="bulkQuantity">Ingrese Cantidad (Ej: 0.250 para 250g):</label>
+            <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                <input type="number" id="bulkQuantity" step="0.001" min="0.001" placeholder="0.000" style="font-size: 1.5rem; width: 150px; text-align: center;" required autofocus>
+                <span id="bulkUnitLabel" style="font-weight: bold;">kg</span>
+            </div>
+
+            <p style="margin-top: 10px;">Subtotal estimado: <strong id="bulkSubtotal" style="color: var(--primary-color); font-size: 1.2rem;">$0.00</strong></p>
+
+            <button type="submit" class="checkout-btn" style="margin-top: 15px;">Agregar al Carrito</button>
+        </form>
+    </div>
+</div>
+
+<button id="btnScanCamera" type="button" title="Escanear Código"
+    style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; 
+           background-color: #BF9DBF; color: white; border: none; 
+           border-radius: 50%; width: 60px; height: 60px; 
+           box-shadow: 0 4px 10px rgba(0,0,0,0.5); cursor: pointer;
+           display: flex; justify-content: center; align-items: center;">
+    <span class="material-icons" style="font-size: 32px;">qr_code_scanner</span>
+</button>
+
+<div id="scannerModal" class="modal" style="display: none; z-index: 10000;">
+    <div class="modal-content" style="background: #000; width: 100%; height: 100%; max-width: none; max-height: none; padding: 0; display: flex; flex-direction: column;">
+        
+        <div style="padding: 15px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.6); color: white;">
+            <h3>Escanear Código</h3>
+            <span id="closeScanner" style="font-size: 2rem; cursor: pointer;">&times;</span>
+        </div>
+        
+        <div id="reader" style="width: 100%; flex-grow: 1; background: black;"></div>
+        
+        <div style="padding: 20px; text-align: center; color: white; background: rgba(0,0,0,0.6);">
+            <p>Apunta la cámara al código de barras</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
